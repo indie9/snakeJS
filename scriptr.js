@@ -2,7 +2,7 @@
 var snakeHead = document.getElementById('snakeHead');
 //создаем массив с коордиинатами тела змейки
 var snake = [{hor:2,ver:0},{hor:1,ver:0},{hor:0,ver:0}];
-
+var snakeLeng = 3;
 //кооринаты головый змейки
 var horizontalCordinat = 3;
 var verticalCordinat = 0;
@@ -14,6 +14,17 @@ var dir = 'right';
 
 //grid
 var grid = 25;
+
+var foodHor = 5;
+var foodVer = 5;
+var food = document.createElement("div");
+food.classList.add('snakeElem');
+food.setAttribute('id',600)
+document.body.append(food);
+var foodelem = document.getElementById(600);
+
+foodelem.style.left = `${foodHor*25}px`;
+foodelem.style.top = `${foodHor*25}px`;
 
 //слушатели кнопок
 document.addEventListener('keydown', function (e) {
@@ -38,11 +49,28 @@ document.addEventListener('keydown', function (e) {
   console.log(e.keyCode)
 });
 
+function getRandomInt(min, max) {
+  return Math.floor(Math.random() * (max - min)) + min;
+}
+
 //помещаем голову змейки в начальные координаты
 snakeHead.style.left = `${horizontalCordinat*25}px`;
 snakeHead.style.top = `${verticalCordinat*25}px`;
 //создаем элементы тела змейки в соответствии с координатами и массива 
+function createSnakeElement(){
+  
+  snake.unshift({hor: buffHorizontalCordinat,ver: buffVerticalCordinat});
+  
+  var snElem = document.createElement("div");
+  snElem.classList.add('snakeElem');
+  snElem.setAttribute('id',snake.length-1)
+  document.body.append(snElem);
+  let snakeElement = document.getElementById(snake.length-1);
+  
+  snakeElement.style.left = `${snake[0].hor*25}px`;
+  snakeElement.style.top = `${snake[0].ver*25}px`
 
+}
 
 for (let i = 0; i < snake.length; i++){
   var snElem = document.createElement("div");
@@ -51,11 +79,12 @@ for (let i = 0; i < snake.length; i++){
   document.body.append(snElem);
   let snakeElement = document.getElementById(i);
   snakeElement.style.left = `${snake[i].hor*25}px`;
-  snakeElement.style.top = `${snake[i].ver*25}px`
+  snakeElement.style.top = `${snake[i].ver*25}px`  
 }
 
 //счетчик
 var count = 0;
+
 function loop() {
   // функция замедляет скорость игры с 60 кадров в секунду до 6 (60/10 = 6)
   requestAnimationFrame(loop);
@@ -82,14 +111,25 @@ function loop() {
   //двигаем голову змейки согласно координатам
   snakeHead.style.left = `${horizontalCordinat*25}px`;
   snakeHead.style.top = `${verticalCordinat*25}px`;
+  console.log(foodHor);
+  console.log(horizontalCordinat)
+  if(horizontalCordinat == foodHor && verticalCordinat == foodVer){
+    createSnakeElement();
+    foodHor = getRandomInt(1,10);
+    foodVer = getRandomInt(1,10);
+    foodelem.style.left = `${foodHor*25}px`;
+    foodelem.style.top = `${foodVer*25}px`;
+  }
+
 
   //массив элементов пополняем прошлыми координатами головы змейки из буфера
   snake.unshift( { hor: buffHorizontalCordinat, ver: buffVerticalCordinat } );
   //удаляем последний элемент
   snake.pop();
-
+ // console.log(document.getElementsByClassName('snakeElem'))
   ////перемещаем тело змейки согласно координатам
   for (let i = 0; i< snake.length;i++){
+    
     let snakeElement = document.getElementById(i);
     snakeElement.style.left = `${snake[i].hor*25}px`;
     snakeElement.style.top = `${snake[i].ver*25}px`
