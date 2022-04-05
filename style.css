@@ -1,0 +1,38 @@
+
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+/*Задаём глобальные параметры*/
+body {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/*Делаем границу вокруг игрового поля*/
+.canvas {
+  border: 1px solid red;
+  width: 400px;
+  height: 400px;
+}
+
+#snakeHead{
+  width: 25px;
+  height: 25px;
+  position:absolute;
+  border: 1px solid green;
+  background-color: red;
+}
+.snakeElem{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  border: 1px solid green;
+  background-color: blue;
+  z-index: 99;
+}
