@@ -15,10 +15,13 @@ body {
 }
 
 /*Делаем границу вокруг игрового поля*/
-.canvas {
+#canvas {
   border: 1px solid red;
   width: 400px;
   height: 400px;
+  position: absolute;
+  top:200px;
+  left: 200px;
 }
 
 #snakeHead{
@@ -27,6 +30,7 @@ body {
   position:absolute;
   border: 1px solid green;
   background-color: red;
+  z-index: 99;
 }
 .snakeElem{
   width: 25px;
@@ -34,5 +38,13 @@ body {
   position: absolute;
   border: 1px solid green;
   background-color: blue;
+  z-index: 9;
+}
+#foodElem{
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  border: 1px solid green;
+  background-color: purple;
   z-index: 99;
 }
