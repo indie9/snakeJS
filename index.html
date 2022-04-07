@@ -8,11 +8,22 @@
 
 <body>
   <!-- Рисуем игровое поле -->
-    <div id="canvas">
-       <div id="foodElem"></div>
-        <div id="snakeHead"></div>
+      <div id="game-frame">
+        <nav>
+          <div id="scroe-table">Score:<span id="score">0</span></div> 
+          
+          <button id="restart">RESTART</button>
+          <button id="start">PLAY</button>
+          <button id="pause">PAUSE</button>
+          
+        </nav>
         
-    </div>  
+        <div id="canvas">
+          <div id="foodElem"></div>
+          <div id="snakeHead"></div>
+        </div>  
+      
+    </div>
 
   <!-- Сам скрипт с игрой -->
   <script src="scriptr.js"></script>
